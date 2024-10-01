@@ -2,13 +2,57 @@
 <html>
 <head>
     <title>Trigger n8n Workflow</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Trigger n8n Workflow</h1>
-    <form method="post">
+    <h1>Generate Good Morning Text</h1>
+    <form method="post" id="workflowForm">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Trigger Workflow</button>
+        <button type="submit">Submit Message</button>
     </form>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('workflowForm');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                var formData = new FormData(form);
+                
+                fetch('', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Successfully Submitted');
+                        form.reset();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            });
+        });
+    </script> -->
 </body>
 </html>
